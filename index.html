@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Loan EMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bank Loan EMI Calculator</h2>
+  <div class="container">
+    <label>Loan Amount (P):</label><br>
+    <input type="number" id="loan" placeholder="Enter loan amount"><br>
+
+    <label>Annual Interest Rate (%):</label><br>
+    <input type="number" id="rate" placeholder="Enter annual interest rate"><br>
+
+    <label>Tenure (Years):</label><br>
+    <input type="number" id="years" placeholder="Enter tenure in years"><br>
+
+    <button onclick="calculateEMI()">Calculate EMI</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateEMI() {
+      let P = parseFloat(document.getElementById("loan").value);
+      let annualRate = parseFloat(document.getElementById("rate").value);
+      let years = parseInt(document.getElementById("years").value);
+
+      let N = years * 12; // tenure in months
+      let R = (annualRate / 12) / 100; // monthly interest rate
+
+      let emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+
+      document.getElementById("result").innerHTML = 
+        "Monthly EMI: ₹ " + emi.toFixed(2);
+    }
+  </script>
+</body>
+</html>
+
